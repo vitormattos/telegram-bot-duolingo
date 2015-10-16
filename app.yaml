@@ -1,0 +1,10 @@
+application: telegram-bot-duolingo
+version: 1
+runtime: php55
+api_version: 1
+
+handlers:
+- url: /enable-webhook
+  script: webhook.php
+- url: /.*
+  script: index.php
