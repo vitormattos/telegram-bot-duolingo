@@ -24,7 +24,8 @@ class RegisterCommand extends Command
         $this->replyWithChatAction(Actions::TYPING);
 
         if(!$arguments) {
-            $this->replyWithMessage('Enter your duolingo username');
+            $this->replyWithMessage('Enter your duolingo username, example:');
+            $this->replyWithMessage('/register MyUsername');
         } else {
             $profile = json_decode(file_get_contents('https://www.duolingo.com/users/'.$arguments));
             if($profile) {

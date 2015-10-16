@@ -1,8 +1,8 @@
 <?php
 use Telegram\Bot\Api;
-require 'vendor/autoload.php';
+require 'config.php';
 
-$telegram = new Api('asdfasdfs');
+$telegram = new Api($config['token']);
 
 $response = $telegram->setWebhook('https://telegram-bot-duolingo.appspot.com');
 var_dump($response);

@@ -1,10 +1,9 @@
 <?php
-$dbh = new PDO('sqlite:duolingo.sqlite');
-
 use Telegram\Bot\Api;
 require 'vendor/autoload.php';
+require 'config.php';
 
-$telegram = new Api('asdfadf');
+$telegram = new Api($config['token']);
 
 // Standalone
 $telegram->addCommands([
