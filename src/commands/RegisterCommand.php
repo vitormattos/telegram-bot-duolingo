@@ -30,7 +30,7 @@ class RegisterCommand extends Command
         } else {
             $profile = json_decode(file_get_contents('https://www.duolingo.com/users/'.$arguments));
             if($profile) {
-                $message = $this->telegram->getWebhookUpdates();
+                $message = $this->telegram->getWebhookUpdates()->all();
                 $this->replyWithMessage(print_r($message, true));
                 return;
 
