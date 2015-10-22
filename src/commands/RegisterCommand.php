@@ -33,15 +33,19 @@ class RegisterCommand extends Command
                 $message = $this->telegram->getWebhookUpdates()->all()->mesage;
 
                 $db = DB::getInstance();
-                $db->perform(
-                    "INSERT INTO users (username, registered_by, created) VALUES (:username, :registered_by, :created)",
-                    [
-                        'username'      => $profile->username,
-                        'registered_by' => $message['from']['id'],
-                        'created' => date('Y-m-d H:i:s', $message['date'])
-                    ]
-                );
-                $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
+                try {
+                    $db->perform(
+                        "INSERT INTO users (username, registered_by, created) VALUES (:username, :registered_by, :created)",
+                        [
+                            'username'      => $profile->username,
+                            'registered_by' => $message['from']['id'],
+                            'created' => date('Y-m-d H:i:s', $message['date'])
+                        ]
+                    );
+                    $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
+                } catch(\Exception $e) {
+                    $this->replyWithMessage(($profile->fullname?:$profile->username).' already registered.');
+                }
             } else {
                 $this->replyWithMessage('Invalid username');
             }

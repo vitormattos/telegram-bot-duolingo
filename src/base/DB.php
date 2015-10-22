@@ -15,7 +15,7 @@ class DB
             $dbopts['pass']
         );
         $db->exec(
-            "CREATE TABLE users
+            "CREATE TABLE IF NOT EXISTS users
 (
   id serial NOT NULL,
   username character varying(50) NOT NULL,
