@@ -44,7 +44,8 @@ class RegisterCommand extends Command
                     );
                     $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
                 } catch(\Exception $e) {
-                    $this->replyWithMessage(($profile->fullname?:$profile->username).' already registered.');
+                    $this->replyWithMessage($e->getMessage())
+;                    $this->replyWithMessage(($profile->fullname?:$profile->username).' already registered.');
                 }
             } else {
                 $this->replyWithMessage('Invalid username');
