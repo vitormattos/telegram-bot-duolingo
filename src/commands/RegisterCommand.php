@@ -34,12 +34,11 @@ class RegisterCommand extends Command
 
                 $dbopts = parse_url(getenv('DATABASE_URL'));
                 $this->replyWithMessage(print_r($dbopts, true));
-                $db = new ExtendedPdo([
+                $this->replyWithMessage(print_r([
                     "pgsql:host={$dbopts["host"]};port={$dbopts["port"]};dbname=".ltrim($dbopts["path"],'/'),
                     $dbopts['user'],
                     $dbopts['pass']
-                    ]);
-                $this->replyWithMessage(print_r($db, true))
+                    ]));
 //                 $db = DB::getInstance();
 //                 $db->perform(
 //                     "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
