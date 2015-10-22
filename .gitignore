@@ -1,6 +1,5 @@
 # Composer
 /vendor/
-*.lock
 
 # Sqlite files
 *.sqlite*
