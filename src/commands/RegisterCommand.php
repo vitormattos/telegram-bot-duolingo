@@ -24,7 +24,7 @@ class RegisterCommand extends Command
         // This will update the chat status to typing...
         $this->replyWithChatAction(Actions::TYPING);
 
-        $this->replyWithMessage(print_r($this->telegram->getWebhookUpdates()->all(), true));
+        $this->replyWithMessage(print_r($this->telegram->getWebhookUpdates()->all()->mesage['from']['id'], true));
         return;
         if(!$arguments) {
             $this->replyWithMessage('Enter your duolingo username, example:');
