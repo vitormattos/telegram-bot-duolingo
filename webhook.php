@@ -20,8 +20,11 @@ if(!$r) {
     die();
 }
 $cont = stream_context_get_params($r);
-var_dump($certificate);
 openssl_x509_export($cont["options"]["ssl"]["peer_certificate"], $certificate);
+$certificate = trim($certificate, "\n");
+echo '<pre>';
+echo $certificate;
+echo '</pre>';
 
 $telegram = new Api($config['token']);
 $response = $telegram->setWebhook(
