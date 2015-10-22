@@ -33,7 +33,7 @@ class RegisterCommand extends Command
                 $message = $this->telegram->getWebhookUpdates()->all()->mesage;
                 $db = DB::getInstance();
                 $db->perform(
-                    "INSERT INTO users (username) VALUES (:username, :registered_by)",
+                    "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
                     [
                         'username'      => $profile->username,
                         'registered_by' => $message['from']['id'],

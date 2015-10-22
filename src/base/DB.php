@@ -8,15 +8,20 @@ class DB
      */
     public static function getInstance()
     {
-        $basepath = realpath(__DIR__ . '/../../');
-        $db = new ExtendedPdo('sqlite:' . $basepath . '/duolingo.sqlite');
+        $dbopts = parse_url(getenv('DATABASE_URL'));
+        $db = new ExtendedPdo([
+            "pgsql:host={$dbopts["host"]};port={$dbopts["port"]};dbname=".ltrim($dbopts["path"],'/'),
+            $dbopts['user'],
+            $dbopts['pass']
+        ]);
         $db->exec(
-            "CREATE TABLE IF NOT EXISTS users (\n".
-            "id INTEGER PRIMARY KEY AUTOINCREMENT,\n".
-            "username TEXT NOT NULL,\n".
-            "registered_by INT NOT NULL,\n".
-            "created datetime default current_timestamp\n".
-            ");"
+            "CREATE TABLE IF NOT EXISTS users
+(
+  id serial NOT NULL,
+  username character varying(50) NOT NULL,
+  registered_by integer NOT NULL,
+  created timestamp with time zone NOT NULL DEFAULT now()
+);"
         );
         return $db;
     }
