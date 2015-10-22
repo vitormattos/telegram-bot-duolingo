@@ -9,11 +9,11 @@ class DB
     public static function getInstance()
     {
         $dbopts = parse_url(getenv('DATABASE_URL'));
-        $db = new ExtendedPdo([
+        $db = new ExtendedPdo(
             "pgsql:host={$dbopts["host"]};port={$dbopts["port"]};dbname=".ltrim($dbopts["path"],'/'),
             $dbopts['user'],
             $dbopts['pass']
-        ]);
+        );
         $db->exec(
             "CREATE TABLE IF NOT EXISTS users
 (

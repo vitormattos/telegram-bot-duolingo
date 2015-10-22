@@ -32,24 +32,16 @@ class RegisterCommand extends Command
             if($profile) {
                 $message = $this->telegram->getWebhookUpdates()->all()->mesage;
 
-                $dbopts = parse_url(getenv('DATABASE_URL'));
-                $this->replyWithMessage(print_r($dbopts, true));
-                $db = new ExtendedPdo([
-                    "pgsql:host={$dbopts["host"]};port={$dbopts["port"]};dbname=".ltrim($dbopts["path"],'/'),
-                    $dbopts['user'],
-                    $dbopts['pass']
-                    ]);
-                $this->replyWithMessage(print_r($db, true));
-//                 $db = DB::getInstance();
-//                 $db->perform(
-//                     "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
-//                     [
-//                         'username'      => $profile->username,
-//                         'registered_by' => $message['from']['id'],
-//                         'date' => date('Y-m-d H:i:s', $message['date'])
-//                     ]
-//                 );
-//                 $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
+                $db = DB::getInstance();
+                $db->perform(
+                    "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
+                    [
+                        'username'      => $profile->username,
+                        'registered_by' => $message['from']['id'],
+                        'date' => date('Y-m-d H:i:s', $message['date'])
+                    ]
+                );
+                $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
             } else {
                 $this->replyWithMessage('Invalid username');
             }
