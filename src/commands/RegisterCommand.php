@@ -31,16 +31,24 @@ class RegisterCommand extends Command
             $profile = json_decode(file_get_contents('https://www.duolingo.com/users/'.$arguments));
             if($profile) {
                 $message = $this->telegram->getWebhookUpdates()->all()->mesage;
-                $db = DB::getInstance();
-                $db->perform(
-                    "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
-                    [
-                        'username'      => $profile->username,
-                        'registered_by' => $message['from']['id'],
-                        'date' => date('Y-m-d H:i:s', $message['date'])
-                    ]
-                );
-                $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
+
+                $dbopts = parse_url(getenv('DATABASE_URL'));
+                $this->replyWithMessage(print_r($dbopts, true));
+                $db = new ExtendedPdo([
+                    "pgsql:host={$dbopts["host"]};port={$dbopts["port"]};dbname=".ltrim($dbopts["path"],'/'),
+                    $dbopts['user'],
+                    $dbopts['pass']
+                    ]);
+//                 $db = DB::getInstance();
+//                 $db->perform(
+//                     "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
+//                     [
+//                         'username'      => $profile->username,
+//                         'registered_by' => $message['from']['id'],
+//                         'date' => date('Y-m-d H:i:s', $message['date'])
+//                     ]
+//                 );
+//                 $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
             } else {
                 $this->replyWithMessage('Invalid username');
             }
