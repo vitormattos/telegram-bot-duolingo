@@ -13,7 +13,7 @@ $g = stream_context_create (array("ssl" => array(
     "verify_peer" => false,
     "verify_peer_name" => false
 )));
-$r = stream_socket_client("ssl://{$url}:443", $errno, $errstr, 30,
+$r = stream_socket_client("ssl://{$url}", $errno, $errstr, 30,
     STREAM_CLIENT_CONNECT, $g);
 if(!$r) {
     echo 'Domain dont exists';
