@@ -34,11 +34,11 @@ class RegisterCommand extends Command
 
                 $db = DB::getInstance();
                 $db->perform(
-                    "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
+                    "INSERT INTO users (username, registered_by, created) VALUES (:username, :registered_by, :created)",
                     [
                         'username'      => $profile->username,
                         'registered_by' => $message['from']['id'],
-                        'date' => date('Y-m-d H:i:s', $message['date'])
+                        'created' => date('Y-m-d H:i:s', $message['date'])
                     ]
                 );
                 $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');

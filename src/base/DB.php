@@ -15,12 +15,13 @@ class DB
             $dbopts['pass']
         );
         $db->exec(
-            "CREATE TABLE IF NOT EXISTS users
+            "CREATE TABLE users
 (
   id serial NOT NULL,
   username character varying(50) NOT NULL,
   registered_by integer NOT NULL,
-  created timestamp with time zone NOT NULL DEFAULT now()
+  created timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT users_username_uk UNIQUE (username)
 );"
         );
         return $db;
