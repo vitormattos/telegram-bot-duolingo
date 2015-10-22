@@ -33,11 +33,13 @@ class RegisterCommand extends Command
                 $message = $this->telegram->getWebhookUpdates()->all()->mesage;
 
                 $dbopts = parse_url(getenv('DATABASE_URL'));
-                $this->replyWithMessage(print_r([
+                $this->replyWithMessage(print_r($dbopts, true));
+                $db = new ExtendedPdo([
                     "pgsql:host={$dbopts["host"]};port={$dbopts["port"]};dbname=".ltrim($dbopts["path"],'/'),
                     $dbopts['user'],
                     $dbopts['pass']
-                    ], true));
+                    ]);
+                $this->replyWithMessage(print_r($db, true))
 //                 $db = DB::getInstance();
 //                 $db->perform(
 //                     "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
