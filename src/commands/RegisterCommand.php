@@ -39,7 +39,7 @@ class RegisterCommand extends Command
                     $dbopts['user'],
                     $dbopts['pass']
                     ]);
-                $this->replyWithMessage(print_r($db, true))
+                $this->replyWithMessage(print_r($db, true));
 //                 $db = DB::getInstance();
 //                 $db->perform(
 //                     "INSERT INTO users (username) VALUES (:username, :registered_by, :date)",
