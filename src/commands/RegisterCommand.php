@@ -30,9 +30,7 @@ class RegisterCommand extends Command
         } else {
             $profile = json_decode(file_get_contents('https://www.duolingo.com/users/'.$arguments));
             if($profile) {
-                $message = $this->telegram->getWebhookUpdates()->all();
-                $this->replyWithMessage(print_r($message, true));
-                return;
+                $update = $this->telegram->getWebhookUpdates()->all();
 
                 $db = DB::getInstance();
                 try {
@@ -40,8 +38,8 @@ class RegisterCommand extends Command
                         "INSERT INTO users (username, registered_by, created) VALUES (:username, :registered_by, :created)",
                         [
                             'username'      => $profile->username,
-                            'registered_by' => $message['from']['id'],
-                            'created' => date('Y-m-d H:i:s', $message['date'])
+                            'registered_by' => $update['message']['from']['id'],
+                            'created' => date('Y-m-d H:i:s', $update['message']['date'])
                         ]
                     );
                     $this->replyWithMessage('Welcome '.($profile->fullname?:$profile->username).'!');
