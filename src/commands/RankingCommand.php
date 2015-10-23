@@ -64,7 +64,7 @@ class RankingCommand extends Command
         // ---- Find the size of graph by substracting the size of borders
         $graph_width = $img_width - $margins * 2;
         $graph_height = $img_height - $margins * 2;
-        $ratio = (($graph_height) / ($max_value - $min_value));
+        $ratio = (($graph_height) / ($total_bars ==1?1:($max_value - $min_value)));
         
         $img = imagecreate($img_width, $img_height);
         
