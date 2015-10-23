@@ -37,15 +37,13 @@ class RankingCommand extends Command
                     $data[($profile->fullname ?  : $profile->username)] += $lang->points;
                 }
             }
+            $tmp_filename = $this->getGraph($data);
+            $this->replyWithPhoto($tmp_filename);
+            unlink($tmp_filename);
         } catch (\Exception $e) {
+            $this->replyWithMessage(print_r($data, true));
             $this->replyWithMessage('Fail in graphic generate');
         }
-        $tmp_filename = $this->getGraph($data);
-        $this->replyWithMessage($tmp_filename ?  : 'empty');
-        $this->replyWithMessage(print_r($data, true));
-        $this->replyWithMessage(filesize($tmp_filename));
-        $this->replyWithPhoto($tmp_filename);
-        unlink($tmp_filename);
     }
 
     private function getGraph($values)
