@@ -27,7 +27,20 @@ class RankingCommand extends Command
     {
         // This will update the chat status to typing...
         $this->replyWithChatAction(Actions::TYPING);
-        $this->replyWithPhoto($this->getGraph($arguments));
+        try {
+            $db = DB::getInstance();
+            $stmt = $db->perform("SELECT * FROM users;");
+            while ($user = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                $profile = json_decode(file_get_contents('https://www.duolingo.com/users/' . $user['username']));
+                $data[($profile->fullname ?  : $profile->username)] = 0;
+                foreach ($profile->languages as $lang) {
+                    $data[($profile->fullname ?  : $profile->username)] += $lang->points;
+                }
+            }
+        } catch (\Exception $e) {
+            $this->replyWithMessage('Fail in graphic generate');
+        }
+        $this->replyWithPhoto($this->getGraph($data));
     }
 
     private function getGraph($values)
