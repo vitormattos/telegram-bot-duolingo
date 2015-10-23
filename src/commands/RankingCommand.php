@@ -41,7 +41,6 @@ class RankingCommand extends Command
             $this->replyWithMessage('Fail in graphic generate');
         }
         $this->replyWithMessage(print_r($data, true));
-        return;
         $this->replyWithPhoto($this->getGraph($data));
     }
 
