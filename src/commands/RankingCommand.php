@@ -44,7 +44,6 @@ class RankingCommand extends Command
         $this->replyWithMessage($tmp_filename ?  : 'empty');
         $this->replyWithMessage(print_r($data, true));
         $this->replyWithMessage(filesize($tmp_filename));
-        return;
         $this->replyWithPhoto($tmp_filename);
         unlink($tmp_filename);
     }
