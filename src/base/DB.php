@@ -21,6 +21,7 @@ class DB
   username character varying(50) NOT NULL,
   registered_by integer NOT NULL,
   created timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT user_pk PRIMARY KEY (id),
   CONSTRAINT users_username_uk UNIQUE (username)
 );"
         );

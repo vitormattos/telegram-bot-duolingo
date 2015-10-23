@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f1db0a9f04e65295508ff10dba3e8e43",
+    "hash": "15b0ef5f5553a23419986db473610f97",
     "packages": [
         {
             "name": "aura/sql",
@@ -507,46 +507,6 @@
             "time": "2015-09-07 23:01:36"
         },
         {
-            "name": "jpgraph/jpgraph",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ztec/JpGraph.git",
-                "reference": "ad26df5941e847cf1255aecd2011ce16207304cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ztec/JpGraph/zipball/ad26df5941e847cf1255aecd2011ce16207304cf",
-                "reference": "ad26df5941e847cf1255aecd2011ce16207304cf",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "JpGraph": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "QPL 1.0"
-            ],
-            "authors": [
-                {
-                    "name": "JpGraph team"
-                }
-            ],
-            "description": "jpGraph, library to make graphs and charts",
-            "homepage": "http://jpgraph.net/",
-            "keywords": [
-                "chart",
-                "data",
-                "graph",
-                "jpgraph",
-                "pie"
-            ],
-            "time": "2013-05-23 14:04:00"
-        },
-        {
             "name": "psr/http-message",
             "version": "1.0",
             "source": {
@@ -594,13 +554,62 @@
                 "response"
             ],
             "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "szymach/c-pchart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/szymach/c-pchart.git",
+                "reference": "d2f0fbaaa7516c2b1a023b9b3ef4aa298f6524f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/szymach/c-pchart/zipball/d2f0fbaaa7516c2b1a023b9b3ef4aa298f6524f4",
+                "reference": "d2f0fbaaa7516c2b1a023b9b3ef4aa298f6524f4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "project",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CpChart\\": "src/"
+                },
+                "files": [
+                    "src/Resources/data/constants.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Port of \"pChart\" library into PHP 5",
+            "homepage": "https://github.com/szymach/c-pchart",
+            "keywords": [
+                "c-pChart",
+                "charts",
+                "pchart",
+                "statistics"
+            ],
+            "time": "2015-10-18 16:52:29"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "jpgraph/jpgraph": 20
+        "szymach/c-pchart": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
