@@ -43,7 +43,7 @@ class RankingCommand extends Command
         $tmp_filename = $this->getGraph($data);
         $this->replyWithMessage($tmp_filename ?  : 'empty');
         $this->replyWithMessage(print_r($data, true));
-        // $this->replyWithMessage(filesize($tmp_filename));
+        $this->replyWithMessage(filesize($tmp_filename));
         return;
         $this->replyWithPhoto($tmp_filename);
         unlink($tmp_filename);
@@ -114,7 +114,7 @@ class RankingCommand extends Command
             // Bar names
             imagestringup($img, 5, $x1 + ($bar_width / 2) - 8, $img_height - ($margins + 5), $key, $x_legend_color);
         }
-        $tmp_file = tmpfile();
+        $tmp_file = tempnam(sys_get_temp_dir(), 'FOO');
         imagepng($img, $tmp_file);
         return $tmp_file;
     }
