@@ -42,6 +42,9 @@ class RankingCommand extends Command
         }
         $this->replyWithMessage(print_r($data, true));
         $tmp_filename = $this->getGraph($data);
+        $this->replyWithMessage($tmp_filename);
+        $this->replyWithMessage(filesize($tmp_filename));
+        return;
         $this->replyWithPhoto($tmp_filename);
         unlink($tmp_filename);
     }
