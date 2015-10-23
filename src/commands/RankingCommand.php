@@ -114,6 +114,7 @@ class RankingCommand extends Command
             imagestringup($img, 5, $x1 + ($bar_width / 2) - 8, $img_height - ($margins + 5), $key, $x_legend_color);
         }
         $tmp_file = tempnam(sys_get_temp_dir(), 'FOO');
+        rename($tmp_file, $tmp_file = $tmp_file.'.png');
         imagepng($img, $tmp_file);
         return $tmp_file;
     }
