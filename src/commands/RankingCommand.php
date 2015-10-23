@@ -40,11 +40,10 @@ class RankingCommand extends Command
         } catch (\Exception $e) {
             $this->replyWithMessage('Fail in graphic generate');
         }
-        $this->replyWithMessage(print_r($data, true));
         $tmp_filename = $this->getGraph($data);
-        $tmp_filename=$tmp_filename?:'empty';
-        $this->replyWithMessage($tmp_filename);
-        $this->replyWithMessage(filesize($tmp_filename));
+        $this->replyWithMessage($tmp_filename ?  : 'empty');
+        $this->replyWithMessage(print_r($data, true));
+        // $this->replyWithMessage(filesize($tmp_filename));
         return;
         $this->replyWithPhoto($tmp_filename);
         unlink($tmp_filename);
