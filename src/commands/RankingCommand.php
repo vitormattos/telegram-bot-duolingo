@@ -41,7 +41,9 @@ class RankingCommand extends Command
             $this->replyWithMessage('Fail in graphic generate');
         }
         $this->replyWithMessage(print_r($data, true));
-        $this->replyWithPhoto($this->getGraph($data));
+        $tmp_filename = $this->getGraph($data);
+        $this->replyWithPhoto($tmp_filename);
+        unlink($tmp_filename);
     }
 
     private function getGraph($values)
@@ -109,11 +111,8 @@ class RankingCommand extends Command
             // Bar names
             imagestringup($img, 5, $x1 + ($bar_width / 2) - 8, $img_height - ($margins + 5), $key, $x_legend_color);
         }
-        ob_start();
-        imagepng($img, null);
-        $output = ob_get_contents();
         $tmp_file = tmpfile();
-        ob_end_clean();
+        imagepng($img, $tmp_file);
         return $tmp_file;
     }
 }
