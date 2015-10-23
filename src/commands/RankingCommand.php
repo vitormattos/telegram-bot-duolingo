@@ -112,7 +112,8 @@ class RankingCommand extends Command
         ob_start();
         imagepng($img, null);
         $output = ob_get_contents();
+        $tmp_file = tmpfile();
         ob_end_clean();
-        return $output;
+        return $tmp_file;
     }
 }
