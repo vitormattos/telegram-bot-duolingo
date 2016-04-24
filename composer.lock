@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7010d4492bad1c7b4d6588afd67246e",
-    "content-hash": "1a335ad08b611a3da9b915d2c2223bc0",
+    "hash": "ce3e1ea82d69306f363e10a83a016260",
+    "content-hash": "0dd5c8c4d4323162102fc059c28df495",
     "packages": [
         {
             "name": "aura/sql",
@@ -895,6 +895,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-gd": "*"
+    },
     "platform-dev": []
 }

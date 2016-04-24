@@ -1,5 +1,6 @@
 {
     "require": {
+        "ext-gd": "*",
         "irazasyed/telegram-bot-sdk": "^1.0",
         "aura/sql": "^2.4",
         "robmorgan/phinx": "^0.4.6"
