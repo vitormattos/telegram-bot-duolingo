@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 require 'config.php';
 
 error_log(file_get_contents('php://input'));
-return;
+
 $telegram = new Api($config['token']);
 
 // Standalone
