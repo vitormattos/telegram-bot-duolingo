@@ -5,20 +5,20 @@ use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Actions;
 use Base\DB;
 
-class RegisterCommand extends Command
+class RemoveCommand extends Command
 {
 
     /**
      *
      * @var string Command Name
      */
-    protected $name = "register";
+    protected $name = "remove";
 
     /**
      *
      * @var string Command Description
      */
-    protected $description = "Register your duolingo username in this group";
+    protected $description = "Remove duolingo username from this group";
 
     /**
      * @inheritdoc
@@ -29,26 +29,25 @@ class RegisterCommand extends Command
         $this->replyWithChatAction(Actions::TYPING);
 
         if (! $arguments) {
-            $this->replyWithMessage('Enter your duolingo username, example:');
-            $this->replyWithMessage('/register MyUsername');
+            $this->replyWithMessage('Enter duolingo username for remove, example:');
+            $this->replyWithMessage('/remove Username');
         } else {
             $profile = json_decode(file_get_contents('https://www.duolingo.com/users/' . $arguments));
             if ($profile) {
                 $update = $this->telegram->getWebhookUpdates()->all();
+
                 $db = DB::getInstance();
                 try {
-                    $db->perform("INSERT INTO users (username, registered_by, chat_id, created) VALUES (:username, :registered_by, :chat_id, :created)", [
+                    $db->perform("DELETE FROM users WHERE username = :username AND chat_id = :chat_id;", [
                         'username' => $profile->username,
-                        'registered_by' => $update['message']['from']['id'],
-                        'chat_id' => $update['message']['chat']['id'],
-                        'created' => date('Y-m-d H:i:s', $update['message']['date'])
+                        'chat_id' => $update['message']['chat']['id']
                     ]);
-                    $this->replyWithMessage('Welcome ' . ($profile->fullname ?  : $profile->username) . '!');
+                    $this->replyWithMessage('User ' . ($profile->fullname ?  : $profile->username) . ' removed!');
                 } catch (\Exception $e) {
                     if($update['message']['from']['id'] == 37900977) {
                         $this->replyWithMessage(print_r($e->getMessage(),true));
                     }
-                    $this->replyWithMessage(($profile->fullname ?  : $profile->username) . ' already registered.');
+                    $this->replyWithMessage('Error removing ' . ($profile->fullname ?  : $profile->username));
                 }
             } else {
                 $this->replyWithMessage('Invalid username');
