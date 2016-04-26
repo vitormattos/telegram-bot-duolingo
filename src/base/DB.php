@@ -18,11 +18,11 @@ class DB
             "CREATE TABLE IF NOT EXISTS users
 (
   id serial NOT NULL,
-  username character varying(50) NOT NULL,
+  username character varying(150) NOT NULL,
   registered_by integer NOT NULL,
-  created timestamp with time zone NOT NULL DEFAULT now(),
-  CONSTRAINT user_pk PRIMARY KEY (id),
-  CONSTRAINT users_username_uk UNIQUE (username)
+  chat_id bigint NOT NULL,
+  created timestamp without time zone NOT NULL DEFAULT now(),
+  CONSTRAINT user_pk PRIMARY KEY (id)
 );"
         );
         return $db;

@@ -5,7 +5,7 @@ use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Actions;
 use Base\DB;
 
-class ListCommand extends Command
+class ListUsersCommand extends Command
 {
 
     /**
