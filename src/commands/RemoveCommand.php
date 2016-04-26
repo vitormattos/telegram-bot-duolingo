@@ -38,8 +38,8 @@ class RemoveCommand extends Command
 
                 $db = DB::getInstance();
                 try {
-                    $db->perform("DELETE FROM users WHERE username = :username AND chat_id = :chat_id;", [
-                        'username' => $profile->username,
+                    $db->perform("DELETE FROM users WHERE lower(username) = :username AND chat_id = :chat_id;", [
+                        'username' => strtolower($profile->username),
                         'chat_id' => $update['message']['chat']['id']
                     ]);
                     $this->replyWithMessage('User ' . ($profile->fullname ?  : $profile->username) . ' removed!');
